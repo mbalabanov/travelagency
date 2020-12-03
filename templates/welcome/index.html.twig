@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WelcomeController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for journey in journeys %}
+            <div class="col-md-12">
+                <div class="alert alert-primary m-2 p-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h3 class="text-secondary">{{ journey.name }}</h3>
+                            <img src="{{ asset(journey.image) }}" class="img-fluid rounded-lg border" alt="{{ journey.name }}"/>
+                        </div>
+                        <div class="col-md-7">
+                            <p class="mt-5">{{ journey.description }}</p>
+                            <p><strong>Price: € {{ journey.price }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
