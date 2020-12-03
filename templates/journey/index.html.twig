@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Journey index{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-12 mt-4 text-center">
+            <h1 class="text-secondary">Journeys</h1>
+            <a href="/journey/new" class="btn btn-primary my-4">Add New Journey</a>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-warning mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        {% for journey in journeys %}
+            <div class="col-md-12">
+                <div class="border m-2 p-4 rounded-lg">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h3 class="text-secondary">{{ journey.name }}</h3>
+                            <img src="{{ asset(journey.image) }}" class="img-fluid rounded-lg" alt="{{ journey.name }}"/>
+                        </div>
+                        <div class="col-md-7">
+                            <p class="mt-5">{{ journey.description }}</p>
+                            <p><strong>Price: € {{ journey.price }}</strong></p>
+                            <p>
+                                <!-- <a  href="/edit/{{journey.id}}" class= "btn btn-primary btn-sm mr-2">Edit</a>
+                                <a href="/delete/{{journey.id}}"  class="btn btn-danger btn-sm mr-2">Delete</a> -->
+                                <a href="{{ path('journey_show', {'id': journey.id}) }}">Show</a>
+                                <a href="{{ path('journey_edit', {'id': journey.id}) }}">Edit</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('journey_new') }}" class="btn btn-primary btn-lg my-4">Create new</a>
+{% endblock %}
